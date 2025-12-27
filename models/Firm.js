@@ -1,0 +1,44 @@
+const mongoose=require("mongoose")
+const firmSchema=new mongoose.Schema({
+    firmname:{
+        type:String,
+        required:true
+    },
+    area:{
+        type:String,
+        required:true
+    },
+    category:{
+        type:[
+            {
+                type:String,
+                enum:["veg","Non-veg"]
+            }
+        ]
+    },
+    region:{
+        type:[
+            {
+                type:String,
+                enum:["south_indian","north-indian","chinese","bakery"]
+            }
+        ]
+    },
+    offer:{
+        type:String
+    },
+    vendor:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Vendor'
+        }
+    ],
+    product:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Product'
+        }
+    ]
+})
+const Firm=mongoose.model('Firm',firmSchema);
+module.exports=Firm;
